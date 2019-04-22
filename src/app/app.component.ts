@@ -1,5 +1,5 @@
-import { Component, Optional } from '@angular/core';
-import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Component, Optional, ViewChild, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 
 
 @Component({
@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   isDarkTheme = false;
   lastDialogResult: string;
   mode: string;
@@ -58,11 +58,42 @@ export class AppComponent {
     { name: 'Warn', color: 'warn' }
   ];
 
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns = ['position', 'name', 'rating'];
+
+  dataSource = new MatTableDataSource(this.foods);
+
+  possibleFoods = [
+    {value: 'Ruti'},
+    {value: 'Halwa'},
+    {value: 'Pizza'},
+    {value: 'Burritos'},
+    {value: 'French Fries'},
+    {value: 'Doi'}
+  ];
+
+  selectedFood: string;
+
   constructor(private _dialog: MatDialog, private _snackbar: MatSnackBar) {
     // Update the value for the progress-bar on an interval.
     setInterval(() => {
       this.progress = (this.progress + Math.floor(Math.random() * 4) + 1) % 100;
     }, 200);
+  }
+
+  ngOnInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  addNewFood(food: string, rating: string) {
+    const data = this.dataSource.data;
+    data.push({ name: food, rating: rating });
+    this.dataSource.data = data;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openDialog() {
@@ -83,7 +114,6 @@ export class AppComponent {
     this.slider.tickInterval = Number(v);
   }
 }
-
 
 @Component({
   template: `

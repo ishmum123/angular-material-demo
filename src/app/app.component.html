@@ -50,6 +50,70 @@
 
   <div class="app-content">
 
+    <!-- Custom Elements -->
+    <mat-card class="app-input-section">
+      <mat-card-content class="form-container">
+        <h2 class="example-h2">Material Input</h2>
+       <mat-form-field>
+          <mat-select placeholder="Select Food" [(ngModel)]="selectedFood" name="food">
+            <mat-option *ngFor="let food of possibleFoods" [value]="food.value">
+              {{food.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput #rating placeholder="Rating" maxlength="10" />
+          <mat-hint align="end">
+            {{rating.value.length}} / 10
+          </mat-hint>
+        </mat-form-field>
+        <button 
+           [disabled]="!(selectedFood && rating.value)"
+           (click)="addNewFood(selectedFood, rating.value)"
+           class="app-button" 
+           mat-raised-button 
+           color="primary">
+           Submit
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card> 
+        <mat-card-content> 
+        <h2 class="example-h2">Material Table</h2> 
+            <mat-form-field class="filter-input">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+            <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8" style="width: 80%">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Rating Column -->
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+        </mat-card-content> 
+    </mat-card>
+   <!-- /Custom Elements -->
+
     <!-- Material Button -->
     <mat-card>
       <mat-card-content>
