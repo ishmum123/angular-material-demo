@@ -13,12 +13,6 @@ export class AppComponent implements OnInit {
   mode: string;
   value: number;
 
-  foods: any[] = [
-    { name: 'Pizza', rating: 'Excellent' },
-    { name: 'Burritos', rating: 'Great' },
-    { name: 'French fries', rating: 'Pretty good' },
-  ];
-
   public selectedValue: string;
 
   public games = [
@@ -58,23 +52,6 @@ export class AppComponent implements OnInit {
     { name: 'Warn', color: 'warn' }
   ];
 
-  @ViewChild(MatSort) sort: MatSort;
-
-  displayedColumns = ['position', 'name', 'rating'];
-
-  dataSource = new MatTableDataSource(this.foods);
-
-  possibleFoods = [
-    {value: 'Ruti'},
-    {value: 'Halwa'},
-    {value: 'Pizza'},
-    {value: 'Burritos'},
-    {value: 'French Fries'},
-    {value: 'Doi'}
-  ];
-
-  selectedFood: string;
-
   constructor(private _dialog: MatDialog, private _snackbar: MatSnackBar) {
     // Update the value for the progress-bar on an interval.
     setInterval(() => {
@@ -83,17 +60,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  addNewFood(food: string, rating: string) {
-    const data = this.dataSource.data;
-    data.push({ name: food, rating: rating });
-    this.dataSource.data = data;
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openDialog() {

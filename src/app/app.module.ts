@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppMaterialModule } from './app.material.module';
 import { AppComponent, DialogContentComponent } from './app.component';
+import { FoodTableComponent } from './food-table/food-table.component';
+import { FoodFormComponent } from './food-form/food-form.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,12 @@ import { AppComponent, DialogContentComponent } from './app.component';
     AppMaterialModule,
     BrowserAnimationsModule
   ],
-  declarations: [AppComponent, DialogContentComponent],
+  declarations: [
+    AppComponent, 
+    DialogContentComponent, 
+    FoodTableComponent, 
+    FoodFormComponent
+  ],
   entryComponents: [DialogContentComponent],
   bootstrap: [AppComponent],
 })

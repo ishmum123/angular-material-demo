@@ -22,7 +22,6 @@ mat-sidenav-container.m2app-dark {
   flex: 1 1 auto;
 }
 
-
 .app-fab {
   position: fixed !important;
   bottom: 20px;
@@ -90,19 +89,4 @@ mat-chip {
 
 .example-spacer {
   flex: 1 1 auto;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-container > * {
-  width: 60%;
-}
-
-.filter-input {
-  display: flex;
-  flex-direction: row-reverse;
-  width: 80%;
 }

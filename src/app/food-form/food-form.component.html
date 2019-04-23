@@ -1,0 +1,26 @@
+<mat-card class="app-input-section">
+  <mat-card-content class="form-container">
+    <h2 class="example-h2">Material Input</h2>
+    <mat-form-field>
+      <mat-select placeholder="Select Food" [(ngModel)]="selectedFood" name="food">
+        <mat-option *ngFor="let food of possibleFoods" [value]="food.value">
+          {{food.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput #rating placeholder="Rating" maxlength="10" />
+      <mat-hint align="end">
+        {{rating.value.length}} / 10
+      </mat-hint>
+    </mat-form-field>
+    <button 
+    [disabled]="!(selectedFood && rating.value)"
+    (click)="addNewFood(selectedFood, rating.value)"
+    class="app-button" 
+    mat-raised-button 
+    color="primary">
+    Submit
+  </button>
+</mat-card-content>
+</mat-card>
