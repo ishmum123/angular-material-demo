@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubmittedFoodService } from 'app/submitted-food.service';
+import { Entity } from 'app/core';
 
 @Component({
   selector: 'app-food-form',
@@ -25,6 +26,6 @@ export class FoodFormComponent implements OnInit {
   }
 
   addNewFood(food: string, rating: string) {
-    this._submittedFoodService.submit({ name: food, rating: rating });
+    this._submittedFoodService.submit(Entity.FOOD, { name: food, rating: rating });
   }
 }

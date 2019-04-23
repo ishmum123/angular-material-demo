@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoodService } from 'app/food.service';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { SubmittedFoodService } from 'app/submitted-food.service';
+import { Entity } from 'app/core';
 
 @Component({
   selector: 'app-food-table',
@@ -19,7 +20,7 @@ export class FoodTableComponent implements OnInit {
   constructor(private _foodService: FoodService,
     private _submittedFoodService: SubmittedFoodService) { 
       this.foods = new MatTableDataSource(_foodService.getFoods());  
-      _submittedFoodService.submittedFood.subscribe(food => this.addNewFood(food.name, food.rating));
+      _submittedFoodService.getSubject(Entity.FOOD).subscribe(food => this.addNewFood(food.name, food.rating));
     }
     
     ngOnInit() {
